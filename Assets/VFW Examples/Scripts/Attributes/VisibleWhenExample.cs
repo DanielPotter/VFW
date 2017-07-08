@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Vexe.Runtime.Types;
 
 namespace VFWExamples
 {
-	public class VisibleWhenExample : BaseBehaviour
-	{
+    public class VisibleWhenExample : BaseBehaviour
+    {
         public int value;
 
         [Comment("// visible when Flag1 == true")]
@@ -26,7 +26,7 @@ namespace VFWExamples
 
         // just to make sure visibility works on system objects too and not just behaviours
         public NestedObject[] array;
-	}
+    }
 
     [Serializable]
     public struct NestedObject

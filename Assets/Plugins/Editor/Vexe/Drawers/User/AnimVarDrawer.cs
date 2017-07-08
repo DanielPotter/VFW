@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -91,7 +91,7 @@ namespace Vexe.Editor.Drawers {
         // The Animator component that corresponds with this drawer
         private Animator _animator;
 
-        // A polymorphic object 
+        // A polymorphic object
         private TargetValue _value;
 
         private Animator Animator {

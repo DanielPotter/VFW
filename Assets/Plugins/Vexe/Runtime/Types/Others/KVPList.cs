@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +16,15 @@ namespace Vexe.Runtime.Types
     /// There is no hashing. Instead, a linear search is performed when you lookup values
     /// </summary>
     [Serializable]
-	public class KVPList<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary
-	{
+    public class KVPList<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary
+    {
         // Should be just public readonly, but that would not play nice with Unity serialization
-		[SerializeField] List<TKey> keys;
-		[SerializeField] List<TValue> values;
+        [SerializeField] List<TKey> keys;
+        [SerializeField] List<TValue> values;
 
         public List<TKey> Keys     { get { return keys;       } }
         public List<TValue> Values { get { return values;     } }
-		public int Count           { get { return keys.Count; } }
+        public int Count           { get { return keys.Count; } }
 
         public KVPList(int capacity)
             : this(new List<TKey>(capacity), new List<TValue>(capacity))
@@ -309,10 +309,10 @@ namespace Vexe.Runtime.Types
             return Remove(item.Key);
         }
 
-		public override string ToString()
-		{
-			return string.Format("<{0}, {1}> (Count = {2})", typeof(TKey).GetNiceName(), typeof(TValue).GetNiceName(), Count);
-		}
+        public override string ToString()
+        {
+            return string.Format("<{0}, {1}> (Count = {2})", typeof(TKey).GetNiceName(), typeof(TValue).GetNiceName(), Count);
+        }
 
         public void Add(object key, object value)
         {
@@ -371,16 +371,16 @@ namespace Vexe.Runtime.Types
         }
     }
 
-	public static class KVPListExtensions
-	{
-		public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this KVPList<TKey, TValue> d)
-		{
-			return RuntimeHelper.CreateDictionary(d.Keys, d.Values);
-		}
+    public static class KVPListExtensions
+    {
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this KVPList<TKey, TValue> d)
+        {
+            return RuntimeHelper.CreateDictionary(d.Keys, d.Values);
+        }
 
-		public static KVPList<TKey, TValue> ToKVPList<TKey, TValue>(this IDictionary<TKey, TValue> d)
-		{
-			return new KVPList<TKey, TValue>(d.Keys.ToList(), d.Values.ToList());
-		}
-	}
+        public static KVPList<TKey, TValue> ToKVPList<TKey, TValue>(this IDictionary<TKey, TValue> d)
+        {
+            return new KVPList<TKey, TValue>(d.Keys.ToList(), d.Values.ToList());
+        }
+    }
 }

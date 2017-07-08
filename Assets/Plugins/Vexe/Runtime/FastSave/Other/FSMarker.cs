@@ -45,18 +45,18 @@ namespace Vexe.FastSave
 
         public void OnBeforeSerialize()
         {
-           _SerializedList.Clear();
-           for (int i = 0; i < ComponentsToSave.Count; )
-           {
-               var type = ComponentsToSave[i];
-               if (type == null)
-               {
-                   ComponentsToSave.RemoveAt(i);
-                   continue;
-               }
-               _SerializedList.Add(type.AssemblyQualifiedName);
-               i++;
-           }
+            _SerializedList.Clear();
+            for (int i = 0; i < ComponentsToSave.Count;)
+            {
+                var type = ComponentsToSave[i];
+                if (type == null)
+                {
+                    ComponentsToSave.RemoveAt(i);
+                    continue;
+                }
+                _SerializedList.Add(type.AssemblyQualifiedName);
+                i++;
+            }
         }
 
         public void OnAfterDeserialize()

@@ -35,7 +35,7 @@ namespace BX20Serializer
         {
             int count = stream.ReadInt();
             if (instance == null)
-            { 
+            {
                 instance = new List<T>(count);
                 ctx.Serializer.ReMark(instance);
             }

@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using Vexe.Runtime.Types;
 
 namespace Vexe.Editor.Drawers

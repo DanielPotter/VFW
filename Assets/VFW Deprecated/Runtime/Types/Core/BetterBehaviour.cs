@@ -59,19 +59,19 @@ namespace Vexe.Runtime.Types
         {
             var members = RuntimeMember.CachedWrapMembers(GetType());
             for (int i = 0; i < members.Count; i++)
-			{
-				var member = members[i];
-				member.Target = this;
-				var defAttr = member.Info.GetCustomAttribute<DefaultAttribute>();
+            {
+                var member = members[i];
+                member.Target = this;
+                var defAttr = member.Info.GetCustomAttribute<DefaultAttribute>();
                 if (defAttr != null)
-				{ 
-					var value = defAttr.Value;
-					if (value == null && !member.Type.IsAbstract) // null means to instantiate a new instance
-						value = member.Type.ActivatorInstance();
-					member.Value = value;
-				}
-			}
-		}
+                {
+                    var value = defAttr.Value;
+                    if (value == null && !member.Type.IsAbstract) // null means to instantiate a new instance
+                        value = member.Type.ActivatorInstance();
+                    member.Value = value;
+                }
+            }
+        }
 
         public static bool IsModified(UnityObject target, SerializerBackend serializer, SerializationData data)
         {

@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using FullSerializer.Internal;
 
 namespace FullSerializer {
     /// <summary>
-    /// The AOT compilation manager 
+    /// The AOT compilation manager
     /// </summary>
     public class fsAotCompilationManager {
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Vexe.Runtime.Extensions;
 using Vexe.Runtime.Types;
@@ -19,11 +19,11 @@ namespace VFWExamples
         // same applies to array/list elements
         public ItemInfo[] items;
 
-		[Display("$name :: $type")]
-		public GameObject[] gameObjs;
+        [Display("$name :: $type")]
+        public GameObject[] gameObjs;
 
-		[Display("$name", FormatKVPair = "[Key: $key, Value: $value]")]
-		public Lookup Transforms;
+        [Display("$name", FormatKVPair = "[Key: $key, Value: $value]")]
+        public Lookup Transforms;
 
         public DisplayOrderExample example = new DisplayOrderExample();
 
@@ -62,27 +62,27 @@ namespace VFWExamples
         }
     }
 
-	/// <summary>
-	/// An example showing how to explictly state the order that members are displayed in
-	/// </summary>
+    /// <summary>
+    /// An example showing how to explictly state the order that members are displayed in
+    /// </summary>
     [Serializable]
-	public struct DisplayOrderExample
-	{
-		[Display(2.5f)] public int three;
-		[Display(-1)]   public int one;
-		[Display(10f)]  public int four;
-		[Display(-2)]   public int zero;
-		[Display(0f)]   public int two;
-		[Display(11f)]  public Five five;
+    public struct DisplayOrderExample
+    {
+        [Display(2.5f)] public int three;
+        [Display(-1)]   public int one;
+        [Display(10f)]  public int four;
+        [Display(-2)]   public int zero;
+        [Display(0f)]   public int two;
+        [Display(11f)]  public Five five;
 
         [Serializable]
-		public struct Five
-		{
-			[Display(1f)] public float seven;
-			[Display(0f)] public string six;
-			[Display] public Color eight; // if no order is specified the member will be drawn in the remaining order
+        public struct Five
+        {
+            [Display(1f)] public float seven;
+            [Display(0f)] public string six;
+            [Display] public Color eight; // if no order is specified the member will be drawn in the remaining order
             public double nine;
             public string ten;
-		}
-	}
+        }
+    }
 }

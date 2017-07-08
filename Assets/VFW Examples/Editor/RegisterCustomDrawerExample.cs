@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEditor;
 using Vexe.Editor;
 using Vexe.Editor.Drawers;
@@ -97,7 +97,7 @@ namespace VFWExamples
                     new DisplayAttribute(Dict.HorizontalPairs), // apply horizontal display on the dictionary pairs
                     new PerKeyAttribute("Popup"), // popup per key
                     new PopupAttribute("ItemsLookup.GetValues")
-                    { 
+                    {
                         TextField = true, // we want a nice text field
                         TakeLastPathItem = true, // since we're using '/' in our values, we only care about the last item in the path
                         HideUpdate = true, // we don't care about updating the popup values

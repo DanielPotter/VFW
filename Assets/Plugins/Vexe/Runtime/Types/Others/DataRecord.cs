@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Vexe.Runtime.Helpers;
 
@@ -14,7 +14,7 @@ namespace Vexe.Runtime.Types
     public class DataRecord : SerializableDictionary<string, RecordValue>
     {
     }
-    
+
     [Serializable]
     public struct RecordValue
     {

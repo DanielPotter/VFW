@@ -10,113 +10,113 @@ using System;
 
 namespace Vexe.Editor.GUIs
 {
-	using ControlType = BaseGUI.ControlType;
+    using ControlType = BaseGUI.ControlType;
 
-	public class HorizontalBlock : GUIBlock
-	{
-		static List<int> nonDefIndicies = new List<int>();
+    public class HorizontalBlock : GUIBlock
+    {
+        static List<int> nonDefIndicies = new List<int>();
 
-		public override void Layout(Rect start)
-		{
+        public override void Layout(Rect start)
+        {
 #if dbg
-		var watch = Stopwatch.StartNew();
+        var watch = Stopwatch.StartNew();
 #endif
 
-			int totalControls = controls.Count;
-			if (totalControls == 0)
-            { 
+            int totalControls = controls.Count;
+            if (totalControls == 0)
+            {
                 height = width = 0;
-				return;
+                return;
             }
 
-			var margin = data.style.margin;
+            var margin = data.style.margin;
 
-			nonDefIndicies.Clear();
+            nonDefIndicies.Clear();
 
-			float totalDefinedWidth = 0f, totalSpace = 0f;
-			int nDefWidth = 0, nFlexibles = 0;
-			for (int i = 0; i < totalControls; i++)
-			{
-				var control = controls[i];
+            float totalDefinedWidth = 0f, totalSpace = 0f;
+            int nDefWidth = 0, nFlexibles = 0;
+            for (int i = 0; i < totalControls; i++)
+            {
+                var control = controls[i];
 
-				totalSpace += control.hSpacing;
+                totalSpace += control.hSpacing;
 
-				if (control.data.type == ControlType.FlexibleSpace)
-				{
-					nFlexibles++;
-				}
-				else if (control.width.HasValue)
-				{
-					totalDefinedWidth += control.width.Value;
-					nDefWidth++;
-				}
-				else
-				{
-					nonDefIndicies.Add(i);
-				}
-			}
+                if (control.data.type == ControlType.FlexibleSpace)
+                {
+                    nFlexibles++;
+                }
+                else if (control.width.HasValue)
+                {
+                    totalDefinedWidth += control.width.Value;
+                    nDefWidth++;
+                }
+                else
+                {
+                    nonDefIndicies.Add(i);
+                }
+            }
 
-			totalSpace -= controls[totalControls - 1].hSpacing;
+            totalSpace -= controls[totalControls - 1].hSpacing;
 
-			float flexOrUnified = 0;
-			if (nFlexibles > 0)
-			{
-				float totalWidthTaken = 0;
+            float flexOrUnified = 0;
+            if (nFlexibles > 0)
+            {
+                float totalWidthTaken = 0;
 
-				for (int i = 0; i < nonDefIndicies.Count; i++)
-				{
-					var c = controls[nonDefIndicies[i]];
-					float w = c.data.style.CalcSize(c.data.content).x;
-					c.width = w;
-					totalWidthTaken += w;
-				}
+                for (int i = 0; i < nonDefIndicies.Count; i++)
+                {
+                    var c = controls[nonDefIndicies[i]];
+                    float w = c.data.style.CalcSize(c.data.content).x;
+                    c.width = w;
+                    totalWidthTaken += w;
+                }
 
-				float leftoverSpace = GetWidth(null, start) - totalSpace - margin.horizontal - totalWidthTaken - totalDefinedWidth;
-				flexOrUnified = leftoverSpace / nFlexibles;
-			}
-			else
-			{
-				flexOrUnified = (GetWidth(null, start) - totalDefinedWidth - totalSpace - margin.horizontal) /
-											(totalControls - nDefWidth);
-			}
+                float leftoverSpace = GetWidth(null, start) - totalSpace - margin.horizontal - totalWidthTaken - totalDefinedWidth;
+                flexOrUnified = leftoverSpace / nFlexibles;
+            }
+            else
+            {
+                flexOrUnified = (GetWidth(null, start) - totalDefinedWidth - totalSpace - margin.horizontal) /
+                                            (totalControls - nDefWidth);
+            }
 
-			x = start.x + margin.left;
-			y = start.y + margin.top;
+            x = start.x + margin.left;
+            y = start.y + margin.top;
 
-			float nextX = x;
+            float nextX = x;
 
-			for (int i = 0; i < totalControls; i++)
-			{
-				var control = controls[i];
+            for (int i = 0; i < totalControls; i++)
+            {
+                var control = controls[i];
 
-				control.x = nextX;
-				control.y = y;
+                control.x = nextX;
+                control.y = y;
 
-				if (!control.width.HasValue)
-					control.width = flexOrUnified;
+                if (!control.width.HasValue)
+                    control.width = flexOrUnified;
 
-				var block = control as GUIBlock;
-				if (block != null)
-				{
-					block.Layout(start);
-				}
+                var block = control as GUIBlock;
+                if (block != null)
+                {
+                    block.Layout(start);
+                }
 
-				float controlHeight = control.height.Value;
-				if (controlHeight > safeHeight)
-					height = controlHeight;
+                float controlHeight = control.height.Value;
+                if (controlHeight > safeHeight)
+                    height = controlHeight;
 
-				nextX += (control.width.Value + control.hSpacing);
-				start.x = nextX;
-			}
+                nextX += (control.width.Value + control.hSpacing);
+                start.x = nextX;
+            }
 
 #if dbg
-		Debug.Log(watch.ElapsedMilliseconds);
+        Debug.Log(watch.ElapsedMilliseconds);
 #endif
-		}
+        }
 
-		public override Layout Space(float pxl)
-		{
-			return new Layout { width = pxl };
-		}
-	}
+        public override Layout Space(float pxl)
+        {
+            return new Layout { width = pxl };
+        }
+    }
 }

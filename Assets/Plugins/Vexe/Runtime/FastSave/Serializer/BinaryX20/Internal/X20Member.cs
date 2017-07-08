@@ -78,7 +78,7 @@ namespace BX20Serializer
         public static bool TryWrapField(FieldInfo field, object target, out X20Member result)
         {
             if (field.IsLiteral)
-            { 
+            {
                 result = null;
                 return false;
             }
@@ -140,7 +140,7 @@ namespace BX20Serializer
         {
             var result = new List<X20Member>();
             foreach (var member in members)
-            { 
+            {
                 var wrapped = WrapMember(member, target);
                 if (wrapped != null)
                     result.Add(wrapped);
@@ -197,7 +197,7 @@ namespace BX20Serializer
 
                 var wrapped = WrapMember(member, null);
                 if (wrapped == null)
-                { 
+                {
                     Debug.Log("Couldn't wrap member: " + name);
                     continue;
                 }

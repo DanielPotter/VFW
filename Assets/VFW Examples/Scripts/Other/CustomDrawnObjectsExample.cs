@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Vexe.Runtime.Types;
 
 namespace VFWExamples

@@ -1,9 +1,9 @@
-﻿using System.IO;
+using System.IO;
 using BX20Serializer;
 using UnityEngine;
 
 namespace Vexe.FastSave.Serializers
-{ 
+{
     public class AnimationSerializer : StrongSerializer<Animation>
     {
         public override void StrongSerialize(Stream stream, Animation value)

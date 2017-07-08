@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
@@ -59,9 +59,9 @@ namespace VFWExamples
             foreach (var member in members)
                 gui.Member(
                     member, // the member that we're drawing
-                    this,	// the unity target object, used for undo
-                    this,	// the object that the members belong to, in this case its the same object
-                    id,		// a unique id. used for foldout values and hash codes
+                    this,   // the unity target object, used for undo
+                    this,   // the object that the members belong to, in this case its the same object
+                    id,     // a unique id. used for foldout values and hash codes
                     false); // whether we want to ignore composite drawers for our members or not
         }
 

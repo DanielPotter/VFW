@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using FullSerializer.Internal;
 
@@ -475,7 +475,7 @@ namespace FullSerializer {
 
                 // We've already serialized this object instance (or it is pending higher up on the call stack).
                 // Just serialize a reference to it to escape the cycle.
-                // 
+                //
                 // note: We serialize the int as a string to so that we don't lose any information
                 //       in a conversion to/from double.
                 if (_references.IsReference(instance)) {

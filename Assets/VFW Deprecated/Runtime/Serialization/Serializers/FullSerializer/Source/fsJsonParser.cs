@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -80,8 +80,8 @@ namespace FullSerializer {
         #region Escaping
         private bool IsHex(char c) {
             return ((c >= '0' && c <= '9') ||
-                     (c >= 'a' && c <= 'f') ||
-                     (c >= 'A' && c <= 'F'));
+                    (c >= 'a' && c <= 'f') ||
+                    (c >= 'A' && c <= 'F'));
         }
 
         private uint ParseSingleChar(char c1, uint multipliyer) {

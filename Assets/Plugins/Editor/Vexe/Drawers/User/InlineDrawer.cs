@@ -1,4 +1,4 @@
-﻿//#define DBG
+//#define DBG
 
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace Vexe.Editor.Drawers
 
         // Add the types you want to support here...
         private Dictionary<Type, Action<UnityObject, BaseGUI>> customEditors;
-        
+
         public InlineDrawer ()
         {
             customEditors = new Dictionary<Type, Action<UnityObject, BaseGUI>>
@@ -45,7 +45,7 @@ namespace Vexe.Editor.Drawers
                             "mass", "drag", "angularDrag", "useGravity", "isKinematic", "interpolation", "collisionDetectionMode");
 
                         using (gui.Indent())
-                        { 
+                        {
                             var rb = target as Rigidbody;
                             rb.constraints = (RigidbodyConstraints)gui.BunnyMask("Constraints", rb.constraints);
                         }

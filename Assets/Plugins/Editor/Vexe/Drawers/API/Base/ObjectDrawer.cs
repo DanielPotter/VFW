@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Vexe.Editor.Types;
 using Vexe.Runtime.Extensions;

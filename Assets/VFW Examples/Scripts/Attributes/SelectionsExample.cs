@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Vexe.Runtime.Types;
 
 namespace VFWExamples
 {
-	public class SelectionsExample : BaseBehaviour
-	{
-		[SelectEnum] public KeyCode jumpKey;
-	}
+    public class SelectionsExample : BaseBehaviour
+    {
+        [SelectEnum] public KeyCode jumpKey;
+    }
 }

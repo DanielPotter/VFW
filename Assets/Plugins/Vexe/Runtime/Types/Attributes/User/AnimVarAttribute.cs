@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Vexe.Runtime.Types {
@@ -16,13 +16,13 @@ namespace Vexe.Runtime.Types {
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter)]
     public class AnimVarAttribute : DrawnAttribute {
-        
+
         private ParameterType _filter = ParameterType.All;
 
         /// <summary>
-        /// A filter on the types of 
+        /// A filter on the types of
         /// </summary>
-	    public ParameterType Filter 
+        public ParameterType Filter
         {
             get { return _filter;  }
             set { _filter = value; }
@@ -40,7 +40,7 @@ namespace Vexe.Runtime.Types {
         /// if you field name was "idleAnim" or "playerDeathAnim" etc and AutoMatch was "Anim",
         /// then it will try to find if "Idle" or "PlayerDeath" etc is a variable defined in the animator,
         /// if so then use it.
-        /// Note though this will automatically assign your variables everytime the drawer is created 
+        /// Note though this will automatically assign your variables everytime the drawer is created
         /// so make sure you use the right value otherwise you might get unexpected results
         /// </summary>
         public string AutoMatch { get; set; }

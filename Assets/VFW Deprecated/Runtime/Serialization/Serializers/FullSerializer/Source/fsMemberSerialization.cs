@@ -1,4 +1,4 @@
-﻿namespace FullSerializer {
+namespace FullSerializer {
     /// <summary>
     /// Controls how the reflected converter handles member serialization.
     /// </summary>

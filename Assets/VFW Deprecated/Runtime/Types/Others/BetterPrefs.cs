@@ -17,7 +17,7 @@
 //    /// You could also subclass and add support for arrays/lists of those types.
 //    /// (**) You could serialize the prefs data to stream, say file or memory.
 //    /// (***) It uses dictionaries so it's faster than writing to registry
-//    /// 
+//    ///
 //    /// NOTE: You could use ValueOrDefault on the dictionaries
 //    /// if you're not sure whether or not there's a value registered with a certain key.
 //    /// There's also an overload that lets you specify the default value to use.

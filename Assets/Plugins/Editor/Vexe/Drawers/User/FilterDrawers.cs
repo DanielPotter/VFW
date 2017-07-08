@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Vexe.Editor.GUIs;
@@ -9,12 +9,12 @@ using Vexe.Runtime.Types;
 
 namespace Vexe.Editor.Drawers
 {
-	public class TextFilter
-	{
-		private readonly string[] _values;
-		private readonly Action<string> _setValue;
+    public class TextFilter
+    {
+        private readonly string[] _values;
+        private readonly Action<string> _setValue;
         private readonly int _id;
-		private string _pattern, _previousPattern, _previousMatch;
+        private string _pattern, _previousPattern, _previousMatch;
         private bool _toggle;
         private EditorRecord _prefs;
 
@@ -26,21 +26,21 @@ namespace Vexe.Editor.Drawers
             return _getRegex(pattern);
         }
 
-		public TextFilter(string[] values, int id, EditorRecord prefs, Action<string> setValue)
+        public TextFilter(string[] values, int id, EditorRecord prefs, Action<string> setValue)
             : this(values, id, true, prefs, setValue)
         {
         }
 
-		public TextFilter(string[] values, int id, bool initialToggle, EditorRecord prefs, Action<string> setValue)
-		{
+        public TextFilter(string[] values, int id, bool initialToggle, EditorRecord prefs, Action<string> setValue)
+        {
             _prefs = prefs;
-			_values = values;
-			_setValue = setValue;
+            _values = values;
+            _setValue = setValue;
             _id = RuntimeHelper.CombineHashCodes(id, "Filter");
 
             _toggle = _prefs.ValueOrDefault(this._id, initialToggle);
             _pattern = _prefs.ValueOrDefault(this._id, "");
-		}
+        }
 
         public bool Field(BaseGUI gui, float width)
         {
@@ -108,64 +108,64 @@ namespace Vexe.Editor.Drawers
             return match ?? pattern;
         }
 
-		public void OnGUI(BaseGUI gui)
+        public void OnGUI(BaseGUI gui)
         {
             OnGUI(gui, 50f);
         }
 
         public void OnGUI(BaseGUI gui, float width)
-		{
+        {
             bool changed = Field(gui, width);
-			if (changed)
-			{
-				string match = Process(_pattern);
-				if (match != _pattern)
-					_setValue(match);
-			}
-		}
+            if (changed)
+            {
+                string match = Process(_pattern);
+                if (match != _pattern)
+                    _setValue(match);
+            }
+        }
     }
 
-	public abstract class FilterDrawer<T, A> : CompositeDrawer<T, A> where A : CompositeAttribute
-	{
-		private TextFilter filter;
+    public abstract class FilterDrawer<T, A> : CompositeDrawer<T, A> where A : CompositeAttribute
+    {
+        private TextFilter filter;
 
-		protected override void Initialize()
-		{
-			filter = new TextFilter(GetValues(), id, prefs, SetValue);
-		}
+        protected override void Initialize()
+        {
+            filter = new TextFilter(GetValues(), id, prefs, SetValue);
+        }
 
-		public override void OnRightGUI()
-		{
-			filter.OnGUI(gui);
-		}
+        public override void OnRightGUI()
+        {
+            filter.OnGUI(gui);
+        }
 
-		protected abstract string[] GetValues();
-		protected abstract void SetValue(string value);
-	}
+        protected abstract string[] GetValues();
+        protected abstract void SetValue(string value);
+    }
 
-	public class FilterEnumDrawer : FilterDrawer<Enum, FilterEnumAttribute>
-	{
-		protected override void SetValue(string value)
-		{
-			memberValue = Enum.Parse(memberType, value) as Enum;
-		}
+    public class FilterEnumDrawer : FilterDrawer<Enum, FilterEnumAttribute>
+    {
+        protected override void SetValue(string value)
+        {
+            memberValue = Enum.Parse(memberType, value) as Enum;
+        }
 
-		protected override string[] GetValues()
-		{
-			return Enum.GetNames(memberType);
-		}
-	}
+        protected override string[] GetValues()
+        {
+            return Enum.GetNames(memberType);
+        }
+    }
 
-	public class FilterTagsDrawer : FilterDrawer<string, FilterTagsAttribute>
-	{
-		protected override string[] GetValues()
-		{
-			return EditorHelper.GetTags();
-		}
+    public class FilterTagsDrawer : FilterDrawer<string, FilterTagsAttribute>
+    {
+        protected override string[] GetValues()
+        {
+            return EditorHelper.GetTags();
+        }
 
-		protected override void SetValue(string value)
-		{
-			memberValue = value;
-		}
-	}
+        protected override void SetValue(string value)
+        {
+            memberValue = value;
+        }
+    }
 }

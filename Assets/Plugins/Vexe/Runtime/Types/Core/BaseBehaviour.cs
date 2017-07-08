@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Vexe.Runtime.Extensions;
 
 namespace Vexe.Runtime.Types
@@ -23,7 +23,7 @@ namespace Vexe.Runtime.Types
         public virtual int GetPersistentId()
         {
             if (_id == -1)
-            { 
+            {
                 _id = GetInstanceID();
                 dLog(this + " is getting a new id: " + _id);
             }

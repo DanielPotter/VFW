@@ -1,4 +1,4 @@
-﻿//#define PROFILE
+//#define PROFILE
 //#define DBG
 
 using System;

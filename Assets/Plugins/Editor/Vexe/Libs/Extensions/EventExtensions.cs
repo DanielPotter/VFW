@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Vexe.Editor.Extensions
 {
@@ -13,5 +13,5 @@ namespace Vexe.Editor.Extensions
         public static bool IsDoubleClick(this Event e) { return e.clickCount == 2; }
         public static bool IsMouseDown(this Event e) { return e.type == EventType.MouseDown; }
         public static bool IsMouseContained(this Event e, Rect rect) { return rect.Contains(e.mousePosition); }
-    } 
+    }
 }

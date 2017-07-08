@@ -1,44 +1,44 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Vexe.Runtime.Types
 {
-	/// <summary>
-	/// Inherit this attribute if you want to have attributes that you could composite/decorate
-	/// Composite attributes are used by CompositeDrawers
-	/// Note that in your composite drawers you should only add decorations and modify the member value
-	/// you shouldn't manipulate the way the member is drawn, this is what the DrawnAttribute is for
-	/// Example of composite attributes: Comment, Whitespace, Min, Max, Regex, etc
-	/// </summary>
-	public abstract class CompositeAttribute : Attribute
-	{
-		public int id;
+    /// <summary>
+    /// Inherit this attribute if you want to have attributes that you could composite/decorate
+    /// Composite attributes are used by CompositeDrawers
+    /// Note that in your composite drawers you should only add decorations and modify the member value
+    /// you shouldn't manipulate the way the member is drawn, this is what the DrawnAttribute is for
+    /// Example of composite attributes: Comment, Whitespace, Min, Max, Regex, etc
+    /// </summary>
+    public abstract class CompositeAttribute : Attribute
+    {
+        public int id;
 
-		public CompositeAttribute()
-		{
-		}
+        public CompositeAttribute()
+        {
+        }
 
-		public CompositeAttribute(int id)
-		{
-			this.id = id;
-		}
-	}
+        public CompositeAttribute(int id)
+        {
+            this.id = id;
+        }
+    }
 
-	/// <summary>
-	/// Inherit this attribute if you want to have attributes that lets you draw your members in a custom way
-	/// These attributes are not composed - they are picked by AttributeDrawers to draw your members
-	/// Example of those: BetterVectorAttribute, PopupAttribute, TagsAttribute, etc
-	/// </summary>
-	public abstract class DrawnAttribute : Attribute
-	{
-	}
+    /// <summary>
+    /// Inherit this attribute if you want to have attributes that lets you draw your members in a custom way
+    /// These attributes are not composed - they are picked by AttributeDrawers to draw your members
+    /// Example of those: BetterVectorAttribute, PopupAttribute, TagsAttribute, etc
+    /// </summary>
+    public abstract class DrawnAttribute : Attribute
+    {
+    }
 
-	/// <summary>
-	/// Annotate sequences (array/list) with this to specify exactly which attributes to apply
+    /// <summary>
+    /// Annotate sequences (array/list) with this to specify exactly which attributes to apply
     /// to each element. If none is specified (empty constructor is used) then all attributes
     /// are used per element. See CollectionElementExample.cs
-	/// </summary>
-	public class PerItemAttribute : Attribute
+    /// </summary>
+    public class PerItemAttribute : Attribute
     {
         public readonly string[] ExplicitAttributes;
 
@@ -52,13 +52,13 @@ namespace Vexe.Runtime.Types
         }
     }
 
-	/// <summary>
-	/// Annotate dictionaries with this to specify which attributes to apply on each key
+    /// <summary>
+    /// Annotate dictionaries with this to specify which attributes to apply on each key
     /// instead of the dictionary itself. If none is specified then all annoated attributes
     /// will be used on each key
     /// See CollectionElementExample.cs
-	/// </summary>
-	public class PerKeyAttribute : Attribute
+    /// </summary>
+    public class PerKeyAttribute : Attribute
     {
         public readonly string[] ExplicitAttributes;
 
@@ -72,13 +72,13 @@ namespace Vexe.Runtime.Types
         }
     }
 
-	/// <summary>
-	/// Annotate dictionaries with this to specify which attributes to apply on each value
+    /// <summary>
+    /// Annotate dictionaries with this to specify which attributes to apply on each value
     /// instead of the dictionary itself. If none is specified then all annoated attributes
     /// will be used on each value
     /// See CollectionElementExample.cs
-	/// </summary>
-	public class PerValueAttribute : Attribute
+    /// </summary>
+    public class PerValueAttribute : Attribute
     {
         public readonly string[] ExplicitAttributes;
 

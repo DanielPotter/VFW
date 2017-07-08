@@ -225,7 +225,7 @@ namespace Vexe.FastSave
         public static byte[] MarkedToMemory(out bool success)
         {
             using(var memory = new MemoryStream())
-            { 
+            {
                 success = MarkedToStream(memory);
                 return memory.ToArray();
             }

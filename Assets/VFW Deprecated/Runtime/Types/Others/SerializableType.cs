@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Vexe.Runtime.Types
-{ 
+{
     /// <summary>
     /// A wrapper class around System.Type that is serializable by Unity
     /// </summary>
@@ -18,7 +18,7 @@ namespace Vexe.Runtime.Types
             get
             {
                 if(_value == null)
-                { 
+                {
                     _value = Type.GetType(_name);
                     if (_value == null)
                         Debug.Log("Couldn't load type: " + _name);

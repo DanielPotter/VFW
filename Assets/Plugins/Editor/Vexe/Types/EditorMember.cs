@@ -22,14 +22,14 @@ namespace Vexe.Editor.Types
 
         // These are set when the member is an element of a collection (list, array, dictionary)
         // So you can use these to query whether or not an element is a collection element (Elemnts != null or ElementIndex != -1)
-		public IList Elements;
-		public int ElementIndex = -1;
+        public IList Elements;
+        public int ElementIndex = -1;
 
         // Set when the member is a collection (list, array, dictionary)
         // Use this to query whether an element is a collection (CollectionCoun != -1)
         public int CollectionCount = -1;
 
-		public readonly int Id;
+        public readonly int Id;
         public readonly string Name;
         public readonly string NiceName;
         public readonly string TypeNiceName;
@@ -89,17 +89,17 @@ namespace Vexe.Editor.Types
         private MemberSetter<object, object> _memberSetter;
         private MemberGetter<object, object> _memberGetter;
 
-		private static BetterUndo _undo = new BetterUndo();
-		private double _undoTimer, _undoLastTime;
+        private static BetterUndo _undo = new BetterUndo();
+        private double _undoTimer, _undoLastTime;
         private const double kUndoTick = .5;
-		private SetVarOp<object> _setVar;
+        private SetVarOp<object> _setVar;
         private static Attribute[] Empty = new Attribute[0];
 
         public readonly HashSet<Attribute> InitializedComposites = new HashSet<Attribute>();
 
         private EditorMember(MemberInfo memberInfo, Type memberType, string memberName,
             object rawTarget, UnityObject unityTarget, int targetId, Attribute[] attributes)
-		{
+        {
             if (attributes == null)
                 attributes = Empty;
             else ResolveUsing(ref attributes);
@@ -140,7 +140,7 @@ namespace Vexe.Editor.Types
             DisplayText = displayFormat;
 
             Id = RuntimeHelper.CombineHashCodes(targetId, TypeNiceName, DisplayText);
-		}
+        }
 
         private void ResolveUsing(ref Attribute[] attributes)
         {
@@ -237,19 +237,19 @@ namespace Vexe.Editor.Types
 
         public object Get()
         {
-           return _get();
+            return _get();
         }
 
-		public void Set(object value)
+        public void Set(object value)
         {
-			bool sameValue = value.GenericEquals(Get());
-			if (sameValue)
-				return;
+            bool sameValue = value.GenericEquals(Get());
+            if (sameValue)
+                return;
 
-			HandleUndoAndSet(value);
+            HandleUndoAndSet(value);
 
-			if (UnityTarget != null)
-				EditorUtility.SetDirty(UnityTarget);
+            if (UnityTarget != null)
+                EditorUtility.SetDirty(UnityTarget);
         }
 
         public T As<T>() where T : class
@@ -257,38 +257,38 @@ namespace Vexe.Editor.Types
             return Get() as T;
         }
 
-		private void HandleUndoAndSet(object value)
-		{
-			if (UnityTarget != null)
-				Undo.RecordObject(UnityTarget, "Editor Member Modification");
+        private void HandleUndoAndSet(object value)
+        {
+            if (UnityTarget != null)
+                Undo.RecordObject(UnityTarget, "Editor Member Modification");
 
-			_undoTimer = EditorApplication.timeSinceStartup - _undoLastTime;
-			if (_undoTimer > kUndoTick)
-			{
-				_undoTimer = 0f;
-				_undoLastTime = EditorApplication.timeSinceStartup;
-				BetterUndo.MakeCurrent(ref _undo);
-				_setVar.ToValue = value;
-				_undo.RegisterThenPerform(_setVar);
-			}
-			else _set(value);
-		}
+            _undoTimer = EditorApplication.timeSinceStartup - _undoLastTime;
+            if (_undoTimer > kUndoTick)
+            {
+                _undoTimer = 0f;
+                _undoLastTime = EditorApplication.timeSinceStartup;
+                BetterUndo.MakeCurrent(ref _undo);
+                _setVar.ToValue = value;
+                _undo.RegisterThenPerform(_setVar);
+            }
+            else _set(value);
+        }
 
         public override string ToString()
         {
             return TypeNiceName + " " + Name;
         }
 
-		public override int GetHashCode()
-		{
-			return Id;
-		}
+        public override int GetHashCode()
+        {
+            return Id;
+        }
 
-		public override bool Equals(object obj)
-		{
-			var member = obj as EditorMember;
-			return member != null && this.Id == member.Id;
-		}
+        public override bool Equals(object obj)
+        {
+            var member = obj as EditorMember;
+            return member != null && this.Id == member.Id;
+        }
 
         public static EditorMember WrapMember(string memberName, Type targetType, object rawTarget, UnityObject unityTarget, int id, Attribute[] attributes)
         {
@@ -370,34 +370,34 @@ namespace Vexe.Editor.Types
             return result;
         }
 
-		public void InitializeIList<T>(IList<T> list, int index, object rawTarget, UnityObject unityTarget)
-		{
-			Elements = list as IList;
-			ElementIndex = index;
-			RawTarget = rawTarget;
-			UnityTarget = unityTarget;
-		}
+        public void InitializeIList<T>(IList<T> list, int index, object rawTarget, UnityObject unityTarget)
+        {
+            Elements = list as IList;
+            ElementIndex = index;
+            RawTarget = rawTarget;
+            UnityTarget = unityTarget;
+        }
 
         private void InitGetSet(Func<object> get, Action<object> set)
         {
             _get = get;
             _set = set;
             _setVar = new SetVarOp<object>();
-			_setVar.GetCurrent = get;
-			_setVar.SetValue = set;
+            _setVar.GetCurrent = get;
+            _setVar.SetValue = set;
         }
 
-		private object GetListElement()
-		{
+        private object GetListElement()
+        {
             if (ElementIndex < 0 || ElementIndex >= Elements.Count)
                 return null;
-			return Elements[ElementIndex];
-		}
+            return Elements[ElementIndex];
+        }
 
-		private void SetListElement(object value)
-		{
-			Elements[ElementIndex] = value;
-		}
+        private void SetListElement(object value)
+        {
+            Elements[ElementIndex] = value;
+        }
 
         private object GetWrappedMemberValue()
         {
@@ -417,12 +417,12 @@ namespace Vexe.Editor.Types
         }
     }
 
-	public static class EditorMemberExtensions
-	{
-		public static bool IsNull(this EditorMember member)
-		{
-			object value;
-			return (member == null || member.Equals(null)) || ((value = member.Value) == null || value.Equals(null));
-		}
-	}
+    public static class EditorMemberExtensions
+    {
+        public static bool IsNull(this EditorMember member)
+        {
+            object value;
+            return (member == null || member.Equals(null)) || ((value = member.Value) == null || value.Equals(null));
+        }
+    }
 }

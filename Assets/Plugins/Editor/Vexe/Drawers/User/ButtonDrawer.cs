@@ -36,7 +36,7 @@ namespace Vexe.Editor.Drawers
             if (_params > 2)
             {
                 Debug.LogError("Button method {0} must take either no parameters, " +
-                                "one parameter of type {1} or two parameters if the member was a list/array, " + 
+                                "one parameter of type {1} or two parameters if the member was a list/array, " +
                                 "first parameter must be of the list/array element type, second is an integer index"
                                 .FormatWith(attribute.Method, memberTypeName));
                 goto Init;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Vexe.Runtime.Extensions
@@ -13,6 +13,6 @@ namespace Vexe.Runtime.Extensions
         public static T GetOrAddComponent<T>(this Component c) where T : Component
         {
             return c.gameObject.GetOrAddComponent<T>();
-        }	
+        }
     }
 }

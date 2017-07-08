@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Vexe.Runtime.Types;
 
@@ -16,7 +16,7 @@ namespace VFWExamples
     /// </summary>
     public class CustomDisplayOptionsExample : BaseBehaviour
     {
-        public int we, are, split; 
+        public int we, are, split;
 
         public override CategoryDisplay GetDisplayOptions()
         {

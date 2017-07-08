@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -11,45 +11,45 @@ using Vexe.Runtime.Types;
 namespace Vexe.Editor
 {
     [InitializeOnLoad]
-	public static class MemberDrawersHandler
-	{
-		static readonly Dictionary<int, List<BaseDrawer>> _cachedCompositeDrawers;
-		static readonly Dictionary<int, BaseDrawer> _cachedMemberDrawers;
-		static readonly Dictionary<int, MethodDrawer> _cachedMethodDrawers;
+    public static class MemberDrawersHandler
+    {
+        static readonly Dictionary<int, List<BaseDrawer>> _cachedCompositeDrawers;
+        static readonly Dictionary<int, BaseDrawer> _cachedMemberDrawers;
+        static readonly Dictionary<int, MethodDrawer> _cachedMethodDrawers;
 
         public static readonly TypeDrawerMapper Mapper;
 
-		public static readonly Func<Type, BaseDrawer> CachedGetObjectDrawer;
+        public static readonly Func<Type, BaseDrawer> CachedGetObjectDrawer;
 
-		static MemberDrawersHandler()
-		{
+        static MemberDrawersHandler()
+        {
             Mapper = new TypeDrawerMapper();
             Mapper.AddBuiltinTypes();
 
-			_cachedMemberDrawers    = new Dictionary<int, BaseDrawer>();
-			_cachedCompositeDrawers = new Dictionary<int, List<BaseDrawer>>();
-			_cachedMethodDrawers    = new Dictionary<int, MethodDrawer>();
+            _cachedMemberDrawers    = new Dictionary<int, BaseDrawer>();
+            _cachedCompositeDrawers = new Dictionary<int, List<BaseDrawer>>();
+            _cachedMethodDrawers    = new Dictionary<int, MethodDrawer>();
 
             //TODO: check if this is still needed
             CachedGetObjectDrawer = new Func<Type, BaseDrawer>(Mapper.GetDrawer).Memoize();
-		}
+        }
 
-		public static List<BaseDrawer> GetCompositeDrawers(EditorMember member, Attribute[] attributes)
-		{
-			List<BaseDrawer> drawers;
-			if (_cachedCompositeDrawers.TryGetValue(member.Id, out drawers))
-				return drawers;
+        public static List<BaseDrawer> GetCompositeDrawers(EditorMember member, Attribute[] attributes)
+        {
+            List<BaseDrawer> drawers;
+            if (_cachedCompositeDrawers.TryGetValue(member.Id, out drawers))
+                return drawers;
 
-			drawers = new List<BaseDrawer>();
+            drawers = new List<BaseDrawer>();
 
             var applied = GetAppliedAttributes(member.Type, attributes);
-			if (applied != null)
-			{
-				var compositeAttributes = applied.OfType<CompositeAttribute>()
-												 .OrderBy(x => x.id)
-												 .ToList();
+            if (applied != null)
+            {
+                var compositeAttributes = applied.OfType<CompositeAttribute>()
+                                                 .OrderBy(x => x.id)
+                                                 .ToList();
 
-				for (int i = 0; i < compositeAttributes.Count; i++)
+                for (int i = 0; i < compositeAttributes.Count; i++)
                 {
                     var drawer = NewCompositeDrawer(compositeAttributes[i].GetType());
                     if (!drawer.CanHandle(member.Type))
@@ -58,25 +58,25 @@ namespace Vexe.Editor
                              .FormatWith(drawer.GetType().GetNiceName(), member.TypeNiceName));
                         continue;
                     }
-					drawers.Add(drawer);
+                    drawers.Add(drawer);
                 }
-			}
+            }
 
-			_cachedCompositeDrawers.Add(member.Id, drawers);
-			return drawers;
-		}
+            _cachedCompositeDrawers.Add(member.Id, drawers);
+            return drawers;
+        }
 
-		public static BaseDrawer GetMemberDrawer(EditorMember member, Attribute[] attributes, bool ignoreAttributes)
-		{
-			BaseDrawer drawer;
-			if (_cachedMemberDrawers.TryGetValue(member.Id, out drawer))
-				return drawer;
+        public static BaseDrawer GetMemberDrawer(EditorMember member, Attribute[] attributes, bool ignoreAttributes)
+        {
+            BaseDrawer drawer;
+            if (_cachedMemberDrawers.TryGetValue(member.Id, out drawer))
+                return drawer;
 
             if (!ignoreAttributes)
             {
                 var applied = GetAppliedAttributes(member.Type, attributes);
                 if (applied != null)
-                { 
+                {
                     var drawingAttribute = applied.GetAttribute<DrawnAttribute>();
                     if (drawingAttribute != null)
                         drawer = NewDrawer(drawingAttribute.GetType());
@@ -84,7 +84,7 @@ namespace Vexe.Editor
             }
 
             if (drawer == null)
-				drawer = NewObjectDrawer(member.Type);
+                drawer = NewObjectDrawer(member.Type);
 
             if (!drawer.CanHandle(member.Type))
             {
@@ -94,10 +94,10 @@ namespace Vexe.Editor
                 drawer = Mapper.GetDrawer(member.Type);
             }
 
-			_cachedMemberDrawers.Add(member.Id, drawer);
+            _cachedMemberDrawers.Add(member.Id, drawer);
 
-			return drawer;
-		}
+            return drawer;
+        }
 
         public static bool IsApplicableAttribute(Type memberType, Attribute attribute, Attribute[] attributes)
         {
@@ -170,50 +170,50 @@ namespace Vexe.Editor
             {
                 if (perValue.ExplicitAttributes != null)
                     attributes = attributes.Where(x => !perValue.ExplicitAttributes.Contains(x.GetType().Name.Replace("Attribute", ""))).ToArray();
-                else 
+                else
                     attributes = new Attribute[] { perValue };
             }
 
             return attributes;
         }
 
-		public static MethodDrawer GetMethodDrawer(int methodId)
-		{
-			MethodDrawer drawer;
-			if (!_cachedMethodDrawers.TryGetValue(methodId, out drawer))
-				_cachedMethodDrawers.Add(methodId, drawer = new MethodDrawer());
-			return drawer;
-		}
+        public static MethodDrawer GetMethodDrawer(int methodId)
+        {
+            MethodDrawer drawer;
+            if (!_cachedMethodDrawers.TryGetValue(methodId, out drawer))
+                _cachedMethodDrawers.Add(methodId, drawer = new MethodDrawer());
+            return drawer;
+        }
 
-		public static BaseDrawer NewObjectDrawer(Type objectType)
-		{
+        public static BaseDrawer NewObjectDrawer(Type objectType)
+        {
             return Mapper.GetDrawer(objectType);
-		}
+        }
 
-		public static BaseDrawer NewCompositeDrawer(Type attributeType)
-		{
+        public static BaseDrawer NewCompositeDrawer(Type attributeType)
+        {
             return Mapper.GetDrawer(attributeType);
-		}
+        }
 
-		public static BaseDrawer NewDrawer(Type attributeType)
-		{
+        public static BaseDrawer NewDrawer(Type attributeType)
+        {
             return Mapper.GetDrawer(attributeType);
-		}
+        }
 
-		public static void ClearCache()
-		{
-			_cachedMemberDrawers.Clear();
-			_cachedCompositeDrawers.Clear();
-			_cachedMethodDrawers.Clear();
-		}
+        public static void ClearCache()
+        {
+            _cachedMemberDrawers.Clear();
+            _cachedCompositeDrawers.Clear();
+            _cachedMethodDrawers.Clear();
+        }
 
-		static class MenuItems
-		{
-			[MenuItem("Tools/Vexe/Debug/Clear drawers cache")]
-			public static void ClearCache()
-			{
-				MemberDrawersHandler.ClearCache();
-			}
-		}
-	}
+        static class MenuItems
+        {
+            [MenuItem("Tools/Vexe/Debug/Clear drawers cache")]
+            public static void ClearCache()
+            {
+                MemberDrawersHandler.ClearCache();
+            }
+        }
+    }
 }

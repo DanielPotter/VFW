@@ -1,10 +1,10 @@
-﻿using UnityEditor;
+using UnityEditor;
 using Vexe.Runtime.Types;
 
 namespace Vexe.Editor.Drawers
 {
-	public class CommentDrawer : CompositeDrawer<object, CommentAttribute>
-	{
+    public class CommentDrawer : CompositeDrawer<object, CommentAttribute>
+    {
         private string buttonLabel = "?";
         private bool showHelp;
 
@@ -14,11 +14,11 @@ namespace Vexe.Editor.Drawers
                 showHelp = gui.ToggleButton(showHelp, buttonLabel, buttonLabel, "Help", MiniButtonStyle.Right);
         }
 
-		public override void OnUpperGUI()
-		{
+        public override void OnUpperGUI()
+        {
             if (!attribute.helpButton)
                 gui.HelpBox(attribute.comment, (MessageType)attribute.type);
-		}
+        }
 
         public override void OnLowerGUI()
         {
@@ -28,5 +28,5 @@ namespace Vexe.Editor.Drawers
                     gui.HelpBox(attribute.comment, (MessageType)attribute.type);
             }
         }
-	}
+    }
 }

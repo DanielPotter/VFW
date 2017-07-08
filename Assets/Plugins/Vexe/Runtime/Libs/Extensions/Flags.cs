@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -54,7 +54,7 @@ namespace Vexe.Runtime.Extensions
         public static readonly Flags DeclaredOnly = new Flags((long)BindingFlags.DeclaredOnly);
 
         /// <summary>
-        /// This value corresponds to the <see href="BindingFlags.ExactBinding"/> value. 
+        /// This value corresponds to the <see href="BindingFlags.ExactBinding"/> value.
         /// Note that this value is respected even in cases where normal Reflection calls would ignore it.
         /// </summary>
         public static readonly Flags ExactBinding = new Flags((long)BindingFlags.ExactBinding);
@@ -82,7 +82,7 @@ namespace Vexe.Runtime.Extensions
         /// <summary>
         /// If this option is specified the search for a named member will perform a partial match instead
         /// of an exact match. If <see href="TrimExplicitlyImplemented"/> is specified the trimmed name is
-        /// used instead of the original member name. If <see href="IgnoreCase"/> is specified the 
+        /// used instead of the original member name. If <see href="IgnoreCase"/> is specified the
         /// comparison uses <see href="StringComparison.OrginalIgnoreCase"/> and otherwise
         /// uses <see href="StringComparison.Ordinal"/>.
         /// </summary>
@@ -103,7 +103,7 @@ namespace Vexe.Runtime.Extensions
 
         /// <summary>
         /// If this option is specified all members that are backers for another member, such as backing
-        /// fields for automatic properties or get/set methods for properties, will be excluded from the 
+        /// fields for automatic properties or get/set methods for properties, will be excluded from the
         /// result.
         /// </summary>
         public static readonly Flags ExcludeBackingMembers = new Flags(1L << 35);
@@ -116,11 +116,11 @@ namespace Vexe.Runtime.Extensions
         public static readonly Flags IgnoreParameterModifiers = new Flags(1L << 36);
 
         /// <summary>
-        /// If this option is specified all members that are have either an override or are being 
-        /// shadowed/hidden (by another member declared using the new keyword) will be excluded from the 
-        /// result. This is implemented by simple name matching of members, ensuring that only the first 
+        /// If this option is specified all members that are have either an override or are being
+        /// shadowed/hidden (by another member declared using the new keyword) will be excluded from the
+        /// result. This is implemented by simple name matching of members, ensuring that only the first
         /// member with a given name is included in the result. Note that this overlaps partially with
-        /// the behavior of <see cref="ExcludeBackingMembers"/>, however, an implementation that excludes 
+        /// the behavior of <see cref="ExcludeBackingMembers"/>, however, an implementation that excludes
         /// members based on the presence of the new keyword does not seem to be possible and would
         /// in any case be much slower.
         /// </summary>
@@ -256,7 +256,7 @@ namespace Vexe.Runtime.Extensions
         }
 
         /// <summary>
-        /// Returns a new Flags instance with the union of the values from <paramref name="flags"/> and 
+        /// Returns a new Flags instance with the union of the values from <paramref name="flags"/> and
         /// <paramref name="mask"/> if <paramref name="condition"/> is true, and otherwise returns the
         /// supplied <paramref name="flags"/>.
         /// </summary>
@@ -266,8 +266,8 @@ namespace Vexe.Runtime.Extensions
         }
 
         /// <summary>
-        /// Returns a new Flags instance with the union of the values from <paramref name="flags"/> and 
-        /// <paramref name="mask"/> if <paramref name="condition"/> is true, and otherwise returns a new 
+        /// Returns a new Flags instance with the union of the values from <paramref name="flags"/> and
+        /// <paramref name="mask"/> if <paramref name="condition"/> is true, and otherwise returns a new
         /// Flags instance with the values from <paramref name="flags"/> that were not in <paramref name="mask"/>.
         /// </summary>
         public static Flags SetOnlyIf(Flags flags, Flags mask, bool condition)
@@ -276,7 +276,7 @@ namespace Vexe.Runtime.Extensions
         }
 
         /// <summary>
-        /// Returns a new Flags instance returns a new Flags instance with the values from <paramref name="flags"/> 
+        /// Returns a new Flags instance returns a new Flags instance with the values from <paramref name="flags"/>
         /// that were not in <paramref name="mask"/> if <paramref name="condition"/> is true, and otherwise returns
         /// the supplied <paramref name="flags"/>.
         /// </summary>

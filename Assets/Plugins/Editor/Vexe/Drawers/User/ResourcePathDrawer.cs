@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEngine;
 using Vexe.Runtime.Types;
@@ -7,19 +7,19 @@ using System.Text.RegularExpressions;
 
 namespace Vexe.Editor.Drawers
 {
-	public class ResourcePathDrawer : AttributeDrawer<string, ResourcePathAttribute> {
-        
-	    private Type resourceType;
-	    private UnityObject target;
+    public class ResourcePathDrawer : AttributeDrawer<string, ResourcePathAttribute> {
 
-	    protected override void Initialize() {
-	        resourceType = attribute.ResourceType;
-	        target = Resources.Load(memberValue);
-	    }
+        private Type resourceType;
+        private UnityObject target;
 
-	    public override void OnGUI() {
+        protected override void Initialize() {
+            resourceType = attribute.ResourceType;
+            target = Resources.Load(memberValue);
+        }
 
-	        using (gui.Vertical()) {
+        public override void OnGUI() {
+
+            using (gui.Vertical()) {
                 using (gui.Horizontal()) {
                     target = gui.Object(displayText, target, resourceType, false);
 
@@ -32,8 +32,8 @@ namespace Vexe.Editor.Drawers
                     else
                         memberValue = Regex.Replace(AssetDatabase.GetAssetPath(target), ".*Resources/(.*)\\..*", "$1");
                 }
-	            if (target != null) {
-	                using (gui.Indent()) {
+                if (target != null) {
+                    using (gui.Indent()) {
                         if (!AssetDatabase.Contains(target))
                             gui.Label("Object is not an Asset, and will not be saved.");
                         else if (!IsResource(target))
@@ -41,12 +41,12 @@ namespace Vexe.Editor.Drawers
                         else
                             gui.Label("Resource Path: " + memberValue);
                     }
-	            }
+                }
             }
-		}
+        }
 
-		private bool IsResource(UnityObject input) {
-		    return Regex.IsMatch(AssetDatabase.GetAssetPath(input), ".*Resources/.*");
-		}
-	}
+        private bool IsResource(UnityObject input) {
+            return Regex.IsMatch(AssetDatabase.GetAssetPath(input), ".*Resources/.*");
+        }
+    }
 }

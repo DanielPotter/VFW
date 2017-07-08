@@ -1,4 +1,4 @@
-﻿//#define DBG
+//#define DBG
 
 using System;
 using System.Collections.Generic;
@@ -324,7 +324,7 @@ namespace Vexe.Editor.Drawers
 
             argMembersList = new List<EditorMember[]>();
 #if DBG
-			Log("Delegate drawer init. " + niceName);
+            Log("Delegate drawer init. " + niceName);
 #endif
         }
 

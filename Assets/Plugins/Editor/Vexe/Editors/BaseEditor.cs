@@ -1,4 +1,4 @@
-﻿//#define PROFILE
+//#define PROFILE
 //#define DBG
 
 using System;
@@ -173,7 +173,7 @@ namespace Vexe.Editor.Editors
             if (_onGUIFunction == null)
                 _onGUIFunction = OnGUI;
             //Create invisible Box with standart layout for calculating correction factor and correct padding
-            //padding have change to Vector4 with 
+            //padding have change to Vector4 with
             //x - left border
             //y - right border
             //z - top border

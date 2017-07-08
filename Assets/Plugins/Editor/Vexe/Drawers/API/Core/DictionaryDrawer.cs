@@ -61,7 +61,7 @@ namespace Vexe.Editor.Drawers
             if (displayAttr != null)
                 _formatPairPattern = displayAttr.FormatKVPair;
 
-			_options = new DictionaryOptions(displayAttr != null ? displayAttr.DictOpt : Dict.None);
+            _options = new DictionaryOptions(displayAttr != null ? displayAttr.DictOpt : Dict.None);
 
             if (_formatPairPattern.IsNullOrEmpty())
                 _formatPairPattern = "[$key, $value]";
@@ -176,7 +176,7 @@ namespace Vexe.Editor.Drawers
                         else gui.FlexibleSpace();
 
                         if (!_options.HideButtons)
-                        { 
+                        {
                             using (gui.State(_kvpList.Count > 0))
                             {
                                 if (gui.ClearButton("dictionary"))
@@ -271,7 +271,7 @@ namespace Vexe.Editor.Drawers
                             }
                         }
                         else
-                        { 
+                        {
                             using (gui.Indent())
                             {
                                 DrawKey(i, entryKey + 1);
@@ -322,7 +322,7 @@ namespace Vexe.Editor.Drawers
         {
             var keyMember = GetElement(_keyElements, _kvpList.Keys, index, id + 1);
             using(gui.If(!_options.Readonly && typeof(TK).IsNumeric(), gui.LabelWidth(15f)))
-            { 
+            {
                 if (_options.Readonly)
                 {
                     var previous = keyMember.Value;
@@ -331,7 +331,7 @@ namespace Vexe.Editor.Drawers
                         keyMember.Value = previous;
                 }
                 else
-                { 
+                {
                     gui.Member(keyMember, @ignoreComposition: _perKeyAttributes == null);
                 }
             }
@@ -449,7 +449,7 @@ namespace Vexe.Editor.Drawers
                 {
                     prefix = from.Last().Key as string;
                     string postfixStr = "";
-                    int i = prefix.Length - 1; 
+                    int i = prefix.Length - 1;
                     for (; i >= 0; i--)
                     {
                         char c = prefix[i];
@@ -461,7 +461,7 @@ namespace Vexe.Editor.Drawers
                         prefix = prefix.Remove(i + 1, postfixStr.Length);
                 }
                 else
-                { 
+                {
                     prefix = "New Key ";
                     postfix = 0;
                 }
@@ -513,8 +513,8 @@ namespace Vexe.Editor.Drawers
             }
         }
 
-		private struct DictionaryOptions
-		{
+        private struct DictionaryOptions
+        {
             public readonly bool Readonly;
             public readonly bool ForceExpand;
             public readonly bool HideHeader;
@@ -525,8 +525,8 @@ namespace Vexe.Editor.Drawers
             public readonly bool ManualAlloc;
             public readonly bool HideButtons;
 
-			public DictionaryOptions(Dict options)
-			{
+            public DictionaryOptions(Dict options)
+            {
                 Readonly           = options.HasFlag(Dict.Readonly);
                 ForceExpand        = options.HasFlag(Dict.ForceExpand);
                 HideHeader         = options.HasFlag(Dict.HideHeader);
@@ -536,7 +536,7 @@ namespace Vexe.Editor.Drawers
                 TempKey            = options.HasFlag(Dict.TempKey);
                 ManualAlloc        = options.HasFlag(Dict.ManualAlloc);
                 HideButtons        = options.HasFlag(Dict.HideButtons);
-			}
-		}
+            }
+        }
     }
 }

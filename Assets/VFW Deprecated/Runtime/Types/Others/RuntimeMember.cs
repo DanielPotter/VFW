@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_EDITOR || UNITY_STANDALONE
 #define FAST_REFLECTION
 #endif
 
@@ -99,7 +99,7 @@ namespace Vexe.Runtime.Types
         public static bool TryWrapField(FieldInfo field, object target, out RuntimeMember result)
         {
             if (field.IsLiteral)
-            { 
+            {
                 result = null;
                 return false;
             }
@@ -213,7 +213,7 @@ namespace Vexe.Runtime.Types
 
                 var wrapped = WrapMember(member, null);
                 if (wrapped == null)
-                { 
+                {
                     Debug.Log("Couldn't wrap member: " + name);
                     continue;
                 }

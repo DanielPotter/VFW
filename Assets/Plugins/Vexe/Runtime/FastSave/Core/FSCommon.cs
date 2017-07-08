@@ -53,7 +53,7 @@ namespace Vexe.FastSave
 
             Serializer.AddSerializer(new AssetReferenceSerializer())
                       .AddSerializer(new ReflectiveComponentSerializer())
-                   	  .AddSerializer(ecs);
+                         .AddSerializer(ecs);
         }
     }
 }

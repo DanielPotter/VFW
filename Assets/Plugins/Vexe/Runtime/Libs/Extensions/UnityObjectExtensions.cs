@@ -1,21 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityObject = UnityEngine.Object;
 
 namespace Vexe.Runtime.Extensions
 {
     public static class UnityObjectExtensions
     {
-        public static T InstantiateNew<T>(this T source, Vector3 pos, Quaternion rot) where T : UnityObject 
+        public static T InstantiateNew<T>(this T source, Vector3 pos, Quaternion rot) where T : UnityObject
         {
             return UnityObject.Instantiate(source, pos, rot) as T;
         }
 
-        public static T InstantiateNew<T>(this T source, Vector3 pos) where T : UnityObject 
+        public static T InstantiateNew<T>(this T source, Vector3 pos) where T : UnityObject
         {
             return UnityObject.Instantiate(source, pos, Quaternion.identity) as T;
         }
 
-        public static T InstantiateNew<T>(this T source) where T : UnityObject 
+        public static T InstantiateNew<T>(this T source) where T : UnityObject
         {
             return UnityObject.Instantiate(source, Vector3.zero, Quaternion.identity) as T;
         }

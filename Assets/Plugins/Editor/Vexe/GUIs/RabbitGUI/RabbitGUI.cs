@@ -186,7 +186,7 @@ namespace Vexe.Editor.GUIs
 
             if (_validRect.HasValue)
             {
-                
+
                 var start = new Rect(_validRect.Value.x + padding.x, _validRect.Value.y + padding.z,
                     EditorGUIUtility.currentViewWidth - padding.y, _validRect.Value.height);
 
@@ -490,20 +490,20 @@ namespace Vexe.Editor.GUIs
             return value;
         }
 
-		public override AnimationCurve Curve (GUIContent content, AnimationCurve value, Layout option)
-		{
-			var data = new ControlData (content, GUIStyles.None, option, ControlType.CurveField);
+        public override AnimationCurve Curve (GUIContent content, AnimationCurve value, Layout option)
+        {
+            var data = new ControlData (content, GUIStyles.None, option, ControlType.CurveField);
 
-			Rect position;
-			if (CanDrawControl (out position, data))
-			{
-				if(value == null)
-					value = new AnimationCurve();
-				return EditorGUI.CurveField(position, content, value);
-			}
+            Rect position;
+            if (CanDrawControl (out position, data))
+            {
+                if(value == null)
+                    value = new AnimationCurve();
+                return EditorGUI.CurveField(position, content, value);
+            }
 
-			return value;
-		}
+            return value;
+        }
 
         public override Gradient GradientField(GUIContent content, Gradient value, Layout option)
         {

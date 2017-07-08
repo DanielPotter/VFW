@@ -176,7 +176,7 @@ namespace Vexe.Editor.Drawers
                     using (gui.Indent(_options.GuiBox ? GUI.skin.box : GUIStyle.none))
                     {
 #if PROFILE
-					Profiler.BeginSample("Sequence Elements");
+                    Profiler.BeginSample("Sequence Elements");
 #endif
                         for (int iLoop = 0; iLoop < memberValue.Count; iLoop++)
                         {
@@ -269,7 +269,7 @@ namespace Vexe.Editor.Drawers
                             }
                         }
 #if PROFILE
-					Profiler.EndSample();
+                    Profiler.EndSample();
 #endif
                     }
                 }

@@ -195,7 +195,7 @@ _______________
 - Attributes: Removed RuntimeOnlyAttribute
 - Attributes: PopupAttributes accepts population methods with list return and not just arrays (i.e. both List<string> and string[])
 - Attributes: added AlwaysUpdate flag to PopupAttribute to determine whether or not to always execute the population method. Keep this false (its default value) unless you have a good reason not to. Why? cause always updating the popup will result in more editor allocations.
-- Examples: Added StaticsExample and ReadonlyFieldsExamples under the Serialization examples 
+- Examples: Added StaticsExample and ReadonlyFieldsExamples under the Serialization examples
 
 _______________
 -- VFW 1.2.6 --
@@ -204,10 +204,10 @@ Editor: Fixed a bug that sometimes causes the editor foldouts to lose their valu
 Editor: Decreased the horizontal space reserved for RabbitGUI in inspector so that no horizontal bar appears at the bottom
 Editor: Implemented drag-drop for fields drawn with RecursiveDrawer (interfaces, abstract system objects, etc)
 Editor: RecursiveDrawer's selection button will only show "MonoBehavoiurs" as opposed to "Unity objects"
-		\ because if we're drawing an interface and we had a ScriptableObject implementing it,
-		\ it doesn't make much sense to create an instance of the ScriptableObject,
-		\ because usually there should be an asset associated with it.
-		\ If you want to drop a ScriptableObject to your interface, create an asset for your SO and drag-drop it to the interface field
+        \ because if we're drawing an interface and we had a ScriptableObject implementing it,
+        \ it doesn't make much sense to create an instance of the ScriptableObject,
+        \ because usually there should be an asset associated with it.
+        \ If you want to drop a ScriptableObject to your interface, create an asset for your SO and drag-drop it to the interface field
 
 _______________
 -- VFW 1.2.7 --
@@ -226,30 +226,30 @@ _______________
 - GUI: RabbitGUI HelpBox height fix
 - Attributes: DisplayOrder works inside System.Object classes as well
 - Attributes: Popup upgrade (see PopupsExample.cs for more details)
-	- you can now use fields and properties to populate the strings in the Popup, not just methods
-	- can populate from unity target
-	- has a button to manually repopulate the popup values (no more automatic update)
-	- removed int/float support. only works with strings now (string[]/List<string>)
-	- the ability to specify case sensitivity for the populate member
-	- the ability to populate from a static member in a type
+    - you can now use fields and properties to populate the strings in the Popup, not just methods
+    - can populate from unity target
+    - has a button to manually repopulate the popup values (no more automatic update)
+    - removed int/float support. only works with strings now (string[]/List<string>)
+    - the ability to specify case sensitivity for the populate member
+    - the ability to populate from a static member in a type
 - Made Reset method in BetterBehaviour/ScriptableObject virtual
 - Drawers: SequenceDrawer shows 0 as line number for the first element
 - Drawers: Redesigned dictionary drawer:
-	- removed adding area
-	- you can now add as much pairs as you want, when done you click a button to write the values
-	- the button becomes orange when the dictionary is modified and so you should write, and red
-	  if you have duplicate key values
+    - removed adding area
+    - you can now add as much pairs as you want, when done you click a button to write the values
+    - the button becomes orange when the dictionary is modified and so you should write, and red
+      if you have duplicate key values
 - Drawers: Fixed a very annoying bug in MethodDrawer where target wasn't being updated. Caused weird
   bugs due to leaks
 - Drawers: Fixed a DictionaryDrawer bug (out of range) when adding items after exiting playmode
 - Drawers/Attributes: Attributes are now applicable on method parameters!
 - Drawers: RecursiveDrawer:
-	- drawer doesn't automatically instantiate an instance for your member if it's null
-	- you won't see the type name in prens for your member text display if it implements ToString
+    - drawer doesn't automatically instantiate an instance for your member if it's null
+    - you won't see the type name in prens for your member text display if it implements ToString
 - New Type: Added uDelegate:
-	- a delegate that could hook up methods of arbitrary parameter type/count
-	- you setup the invocation values in the editor, the values are serialized
-	- when you then invoke it, it uses those values as arguments to pass to the handlers (methods)
+    - a delegate that could hook up methods of arbitrary parameter type/count
+    - you setup the invocation values in the editor, the values are serialized
+    - when you then invoke it, it uses those values as arguments to pass to the handlers (methods)
 - Editor: Added a EditorView int in BetterEditor.cs that you could use to specify the default view for
   your behaviours. 1 means always use BasicView, 2 means always MinimalView, 0 (the default) means categorized
   view, unless annotated with BasicView or MinimalView
@@ -264,12 +264,12 @@ _______________
 
 - Seperated the examples out in a different package
 - Editor: Structs inspection fixed! woot!
-- Attributes: Added VisibleWhen: Annotate members with this attribute to make then visible only when a certain condition is met 
+- Attributes: Added VisibleWhen: Annotate members with this attribute to make then visible only when a certain condition is met
 - Drawers: Right click in RecursiveDrawer selection button creates instance of the type if it wasn't abstract
 - Removed: ColorDuoDrawer, BetterUndo, TransformEditor, VisibleMember, BetterEditor
 - Moved ColorDuo and StyleDuo from DLLs to GUIHelper
 - Moved SelectionMemorizer out from the DLLs to Plugins/Editor/Vexe/Other.
-	Remember: back: Ctrl+Shift+- forward: Ctrl+Shift+=
+    Remember: back: Ctrl+Shift+- forward: Ctrl+Shift+=
 - Cleaned up Dlls. We now have vRuntime and vEditor instead of RuntimeHelpers/Extensions and
   EditorHelpers/Extensions (no effect on namespaces)
 

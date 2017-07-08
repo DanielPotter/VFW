@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Vexe.Runtime.Extensions;
 using Vexe.Runtime.Types;
@@ -121,7 +121,7 @@ namespace Vexe.Runtime.Serialization
 
             return Serialize(value.GetType(), value, context);
         }
-        
+
         public string Serialize(object value)
         {
             return Serialize(value, null);

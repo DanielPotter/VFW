@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace FullSerializer.Internal {
     public class fsPrimitiveConverter : fsConverter {
@@ -100,4 +100,3 @@ namespace FullSerializer.Internal {
         }
     }
 }
-

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -327,10 +327,10 @@ namespace Vexe.Runtime.Extensions
                 // push parameters in order to then call ctor
                 for (int i = 0, imax = paramTypes.Length; i < imax; i++)
                 {
-                    emit.ldarg0()					// push args array
-                        .ldc_i4(i)					// push index
-                        .ldelem_ref()				// push array[index]
-                        .unbox_any(paramTypes[i]);	// cast
+                    emit.ldarg0()                   // push args array
+                        .ldc_i4(i)                  // push index
+                        .ldelem_ref()               // push array[index]
+                        .unbox_any(paramTypes[i]);  // cast
                 }
 
                 emit.newobj(ctor);
@@ -362,9 +362,9 @@ namespace Vexe.Runtime.Extensions
             var prams = method.GetParameters();
             for (int i = 0, imax = prams.Length; i < imax; i++)
             {
-                emit.ldarg1()		// push array
-                    .ldc_i4(i)		// push index
-                    .ldelem_ref();	// pop array, index and push array[index]
+                emit.ldarg1()       // push array
+                    .ldc_i4(i)      // push index
+                    .ldelem_ref();  // pop array, index and push array[index]
 
                 var param = prams[i];
                 var dataType = param.ParameterType;
@@ -512,8 +512,8 @@ namespace Vexe.Runtime.Extensions
             // here's what we're basically generating (remember, we're weakly typed, so
             // the target argument is of type object here):
             // TargetType tmp = (TargetType)target; // unbox
-            // tmp.member = (MemberField)value;		// set member value
-            // target = tmp;						// box back
+            // tmp.member = (MemberField)value;     // set member value
+            // target = tmp;                        // box back
 
             emit.declocal(targetType);
             emit.ldarg0()
@@ -555,7 +555,7 @@ namespace Vexe.Runtime.Extensions
             public ILEmitter ldarga_s(int idx)                     { il.Emit(OpCodes.Ldarga_S, idx); return this; }
             public ILEmitter ldarg(int idx)                        { il.Emit(OpCodes.Ldarg, idx); return this; }
             public ILEmitter ldarg_s(int idx)                      { il.Emit(OpCodes.Ldarg_S, idx); return this; }
-            public ILEmitter ifclass_ldind_ref(Type type)		   { if (!type.IsValueType) il.Emit(OpCodes.Ldind_Ref); return this; }
+            public ILEmitter ifclass_ldind_ref(Type type)          { if (!type.IsValueType) il.Emit(OpCodes.Ldind_Ref); return this; }
             public ILEmitter ldloc0()                              { il.Emit(OpCodes.Ldloc_0); return this; }
             public ILEmitter ldloc1()                              { il.Emit(OpCodes.Ldloc_1); return this; }
             public ILEmitter ldloc2()                              { il.Emit(OpCodes.Ldloc_2); return this; }

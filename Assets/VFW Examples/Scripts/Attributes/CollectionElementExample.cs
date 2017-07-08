@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Vexe.Runtime.Types;
 using System.Collections.Generic;
 
 namespace VFWExamples
-{ 
+{
     public class CollectionElementExample : BaseBehaviour
     {
         // apply Comment on array

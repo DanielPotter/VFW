@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Vexe.Runtime.Types;
 
 namespace VFWExamples
